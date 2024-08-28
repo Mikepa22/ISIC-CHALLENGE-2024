@@ -208,7 +208,7 @@ ae = autoencoder_trainer(en, de, em)
 #early_stopping = EarlyStopping(monitor='val_loss', patience=20, restore_best_weights=True)
 
 ae.fit([x_train, y_train], x_train,
-       epochs=10000,
+       epochs=7000,
        batch_size=128,
        shuffle=True,
        validation_data=([x_test, y_test], x_test)
@@ -216,10 +216,10 @@ ae.fit([x_train, y_train], x_train,
        )
 
 # save encoder model
-en.save('encoder10.h5')
-de.save('decoder10.h5')
-em.save('embedding10.h5')
-ae.save('ae10.h5')
+en.save('encoder7.h5')
+de.save('decoder7.h5')
+em.save('embedding7.h5')
+ae.save('ae7.h5')
 
 
 # Show results of reconstructed images
@@ -248,7 +248,7 @@ for i in range(n):
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
 #plt.show()
-plt.savefig('reconstructed_images.png')
+plt.savefig('reconstructed_images7.png')
 plt.close()  # Comentado para que no muestre la ventana
 
 ####################### Use the pre-trained Autoencoder #########################
@@ -532,29 +532,29 @@ def plt_img(generator, epoch):
                 plt.gray()
             ax.get_xaxis().set_visible(False)
             ax.get_yaxis().set_visible(False)
-    plt.savefig('bagan_gp_results/generated_plot_%d.png' % epoch)
+    plt.savefig('bagan_gp_results7/generated_plot_%d.png' % epoch)
     #plt.show()
     plt.close()
     return
 
 # make directory to store results
-os.system('mkdir -p bagan_gp_results')
+os.system('mkdir -p bagan_gp_results7')
 
 # Record the loss
 d_loss_history = []
 g_loss_history = []
 
 ############################# Start training #############################
-LEARNING_STEPS = 40
+LEARNING_STEPS = 50
 for learning_step in range(LEARNING_STEPS):
     print('LEARNING STEP # ', learning_step + 1, '-' * 50)
-    bagan_gp.fit(x_train, y_train, batch_size=128, epochs=25)
+    bagan_gp.fit(x_train, y_train, batch_size=128, epochs=40)
     d_loss_history += bagan_gp.history.history['d_loss']
     g_loss_history += bagan_gp.history.history['g_loss']
     if (learning_step+1)%1 == 0:
         plt_img(bagan_gp.generator, learning_step)
     if (learning_step+1)%1 == 0:
-      bagan_gp.generator.save('bagan_gp_skin_epoch'+str(learning_step)+'.h5')
+      bagan_gp.generator.save('bagan_gp_skin7_epoch'+str(learning_step)+'.h5')
       # Supongamos que 'model' es tu modelo de Keras
      
 ############################# Display performance #############################

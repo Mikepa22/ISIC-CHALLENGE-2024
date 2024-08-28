@@ -50,7 +50,7 @@ def scale_images(images, new_shape):
 
 
 # load generator
-gen_path = r'C:\Users\Miguel Palomino\Repository\ISIC-CHALLENGE-2024\BAGANGP\bagan_gp_tennis_epoch19.h5'
+gen_path = 'bagan_gp_skin7_epoch49.h5'
 generator = load_model(gen_path)
 
 # Carga tu dataset
@@ -59,7 +59,7 @@ images = train_data['x']
 labels = train_data['y']
 
 # División del dataset en entrenamiento y validación (test)
-x_train, x_val, y_train, y_val = train_test_split(images, labels, test_size=0.3, shuffle=True, random_state=38)
+x_train, x_val, y_train, y_val = train_test_split(images, labels, test_size=0.25, shuffle=True, random_state=38)
 
 # Asigna real_imgs y real_label a las imágenes y etiquetas de validación
 real_imgs = x_val

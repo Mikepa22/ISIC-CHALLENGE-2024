@@ -8,7 +8,7 @@ from numpy.random import shuffle
 import cv2
 # %% --------------------------------------- Load Models ---------------------------------------------------------------
 # Carga tu dataset
-train_data = np.load('dataset.npz')
+train_data = np.load(r'C:\Users\Miguel Palomino\Repository\dataset.npz')
 images = train_data['x']
 labels = train_data['y']
 #latent=0
@@ -21,13 +21,13 @@ for i in range(images.shape[0]):
     real[i] = cv2.resize(images[i], (64, 64)).reshape((64, 64, channel))
 
 # División del dataset en entrenamiento y validación (test)
-x_train, x_val, y_train, y_val = train_test_split(real, labels, test_size=0.2, shuffle=True, random_state=30)
+x_train, x_val, y_train, y_val = train_test_split(real, labels, test_size=0.3, shuffle=True, random_state=30)
 
 
 n_classes = len(np.unique(y_train))
 # encoder = load_model('bagan_encoder.h5')
-encoder = load_model('encoder_tennis6.h5', compile=True)
-embedding = load_model('embedding_tennis6.h5')
+encoder = load_model('encoder7.h5', compile=True)
+embedding = load_model('embedding7.h5')
 #encoder.compile(optimizer='adam', loss='mse')
 
 # %% --------------------------------------- TSNE Visualization --------------------------------------------------------
